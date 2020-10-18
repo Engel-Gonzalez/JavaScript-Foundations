@@ -50,21 +50,22 @@ When your math is correct, monthlyRate will equal 1073.64
 
 If your name is `Oscar` mortgageCalculator() should return "Oscar, your monthly rate is 1073.64"
 */
-function mortgageCalculator (p, I, N) {
-    let principal = 200000;
-    let interestRate = 0.05;
-    let years = 30;
-    let name = 'Engel'
-    let monthlyInterestRate = interestRate / 12;
-    let periods = years * 12;
-    let n1 = Math.pow((1 + monthlyInterestRate ) ,periods);
-    let numerator = principal * n1 * monthlyInterestRate;
-    let denominator = n1 - 1;
-    let monthlyRate = numerator / denominator;
-    console.log(name +', your monthly rate is'+ " " + monthlyRate)
-}
 
-mortgageCalculator(200000, 0.05, 30)
+// function mortgageCalculator (principal, interestRate, years) {
+//     let principal = 200000;
+//     let interestRate = 0.05;
+//     let years = 30;
+//     let name = 'Engel'
+//     let monthlyInterestRate = interestRate / 12;
+//     let periods = years * 12;
+//     let n1 = Math.pow((1 + monthlyInterestRate ) ,periods);
+//     let numerator = principal * n1 * monthlyInterestRate;
+//     let denominator = n1 - 1;
+//     let monthlyRate = numerator / denominator;
+//     console.log(name +', your monthly rate is'+ " " + monthlyRate)
+// }
+
+// mortgageCalculator()
 
 
 
@@ -75,8 +76,33 @@ For example,
 mortgageCalculator(200000, 0.05, 30); <-- should return 1,073.64
 */
 
+function mortgageCalculator (principal, interestRate, years, creditScore) {
 
+    const name = 'Engel'
+    let monthlyInterestRate = interestRate / 12;
+    let periods = years * 12;
+    let n1 = Math.pow((1 + monthlyInterestRate ) ,periods);
+    let numerator = principal * n1 * monthlyInterestRate;
+    let denominator = n1 - 1;
+    let monthlyRate = numerator / denominator;
 
+    if (creditScore > 740)
+    {
+        monthlyRate = (monthlyRate * 0.95);
+     } 
+     else if (creditScore < 660)
+     {
+         monthlyRate = (monthlyRate * 1.05);
+     } 
+     else if (creditScore <= 740 && creditScore >= 660)
+     {
+         monthlyRate = (monthlyRate);
+     }
+
+     console.log(name +', your monthly rate is'+ " " + monthlyRate);
+}
+
+ mortgageCalculator(200000, 0.05, 30, 660)
 
 
 // 🏡 Task 5: Conditionals
@@ -87,7 +113,13 @@ Then, add control flow within your function such that IF creditScore is above 74
 Hint: To drop an interest rate by 5% you can take monthlyRate and multiply it by 0.95. Similarly, to increase an interest rate by 5% you'd do monthlyRate * 1.05. 
 */
 
-
+// if (creditScore >= 740){
+//    monthlyRate = monthlyRate * 0.95
+// } else if (creditScore <= 660){
+//     monthlyRate = monthlyRate * 1.05
+// } else (creditScore <= 740 AND creditScore >= 660){
+//     monthlyRate = monthlyRate
+// }
 
 
 // 🏡 Task 6: Loops
@@ -106,8 +138,23 @@ For example, variableInterestRate(200000, 0.04, 30) should console.log:
 "{Name}, with an interest rate of 0.06, your monthly rate is $1199"
 */
 
+function variableInterestRate (principal, interestRate, years){
+    for (interestRate = 0.02 ; interestRate < 0.06 ; interestRate += 0.005 ) {
 
+        const name = 'Engel'
+        let monthlyInterestRate = interestRate / 12;
+        let periods = years * 12;
+        let n1 = Math.pow((1 + monthlyInterestRate ) ,periods);
+        let numerator = principal * n1 * monthlyInterestRate;
+        let denominator = n1 - 1;
+        let monthlyRate = Math.round(numerator / denominator);
+    
 
+        console.log(name + ',' + " " + 'with an interest rate of' + " " +interestRate.toFixed(3) + ',' + " "+ 'your monthly rate is' + " " + '$' + monthlyRate)
+    }
+}
+
+variableInterestRate (200000, 0.4, 30)
 
 // 🌟🌟🌟 STRETCH 🌟🌟🌟//
 
